@@ -18,7 +18,6 @@ def parent():
 
 @app.route('/child', methods=['GET', 'POST'])
 def child():
-    # Инициализация переменных в сессии, если они отсутствуют
     if 'score' not in session:
         session['score'] = 0
     if 'correct_answers' not in session:
@@ -33,51 +32,21 @@ def child():
             answer = int(request.form['answer'])
             if 'start_time' in session and time.time() - session['start_time'] > 10:
                 session['score'] -= 5
-                session['message'] = "Time's up!"
+                session['message'] = "Время вышло!"
             else:
                 if answer == session.get('correct_answer'):
                     session['score'] += 10
                     session['correct_answers'] += 1
-                    session['message'] = "Correct!"
+                    session['message'] = "Правильно!"
                 else:
                     session['score'] -= 5
-                    session['message'] = "Wrong!"
+                    session['message'] = "Неправильно!"
         except (ValueError, KeyError):
             session['score'] -= 5
-            session['message'] = "Invalid input. Wrong!"
+            session['message'] = "Неверный ввод. Неправильно!"
 
         session['total_questions'] += 1
         return redirect(url_for('child'))
 
     num1 = random.randint(10, 99)
-    num2 = random.randint(10, 99)
-    operation = random.choice(['+', '-', '*', '/'])
-
-    if operation == '+':
-        correct_answer = num1 + num2
-    elif operation == '-':
-        correct_answer = num1 - num2
-    elif operation == '*':
-        correct_answer = num1 * num2
-    elif operation == '/':
-        while num2 == 0 or num1 % num2 != 0:
-            num2 = random.randint(10, 99)
-        correct_answer = num1 // num2
-
-    wrong_answers = set()
-    while len(wrong_answers) < 3:
-        wrong_answer = correct_answer + random.choice([-10, -5, 5, 10])
-        if wrong_answer != correct_answer and wrong_answer not in wrong_answers:
-            wrong_answers.add(wrong_answer)
-    wrong_answers = list(wrong_answers)
-
-    options = [correct_answer] + wrong_answers
-    random.shuffle(options)
-
-    session['correct_answer'] = correct_answer
-    session['start_time'] = time.time()
-
-    return render_template('child.html', num1=num1, num2=num2, operation=operation, options=options, message=session.get('message'))
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    num2 = random.randint &#8203;:citation[oaicite:0]{index=0}&#8203;
