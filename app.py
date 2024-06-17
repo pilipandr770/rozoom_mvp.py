@@ -49,4 +49,4 @@ def child():
         return redirect(url_for('child'))
 
     num1 = random.randint(10, 99)
-    num2 = random.randint &#8203;:citation[oaicite:0]{index=0}&#8203;
+    num2 = random.randint(10, 99)
