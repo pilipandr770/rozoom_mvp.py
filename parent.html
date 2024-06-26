@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Родительская панель</title>
+    <title>Родительская страница</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Родительская панель</h1>
-        <p>Всего вопросов: {{ total_questions }}</p>
-        <p>Правильных ответов: {{ correct_answers }}</p>
-        <p>Счет: {{ score }}</p>
-        <a href="{{ url_for('home') }}" class="button">Назад на главную</a>
-    </div>
+    <h1>Статистика</h1>
+    <p>Всего вопросов: {{ total_questions }}</p>
+    <p>Правильных ответов: {{ correct_answers }}</p>
+    <p>Счёт: {{ score }}</p>
+    <a href="{{ url_for('home') }}">Назад на главную</a>
 </body>
 </html>
