@@ -2,23 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Child Dashboard</title>
+    <title>Детская страница</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Child Dashboard</h1>
-        <form method="post">
-            <p>{{ num1 }} {{ operation }} {{ num2 }} = ?</p>
-            {% for option in options %}
-                <label class="option">
-                    <input type="radio" name="answer" value="{{ option }}"> {{ option }}
-                </label><br>
-            {% endfor %}
-            <button type="submit" class="button">Submit</button>
-        </form>
-        <p>{{ message }}</p>
-        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
-    </div>
+    <h1>Ответь на вопрос</h1>
+    <p>{{ num1 }} + {{ num2 }} = ?</p>
+    <form method="post">
+        <input type="text" name="answer" required>
+        <button type="submit">Отправить</button>
+    </form>
+    <p>{{ message }}</p>
+    <p>Счёт: {{ score }}</p>
+    <a href="{{ url_for('home') }}">Назад на главную</a>
 </body>
 </html>
