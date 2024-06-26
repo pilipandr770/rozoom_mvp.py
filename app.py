@@ -3,7 +3,7 @@ import random
 import time
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+app.secret_key = 'supersecretkey'  # Лучше заменить на безопасный ключ из переменных окружения
 
 @app.route('/')
 def home():
@@ -12,8 +12,8 @@ def home():
 @app.route('/parent')
 def parent():
     return render_template('parent.html', 
-                           total_questions=session.get('total_questions', 0),
-                           correct_answers=session.get('correct_answers', 0),
+                           total_questions=session.get('total_questions', 0), 
+                           correct_answers=session.get('correct_answers', 0), 
                            score=session.get('score', 0))
 
 @app.route('/child', methods=['GET', 'POST'])
@@ -26,7 +26,7 @@ def child():
         session['total_questions'] = 0
     if 'message' not in session:
         session['message'] = ''
-
+    
     if request.method == 'POST':
         try:
             answer = int(request.form['answer'])
@@ -44,9 +44,15 @@ def child():
         except (ValueError, KeyError):
             session['score'] -= 5
             session['message'] = "Неверный ввод. Неправильно!"
-
+        
         session['total_questions'] += 1
         return redirect(url_for('child'))
-
+    
     num1 = random.randint(10, 99)
     num2 = random.randint(10, 99)
+    session['correct_answer'] = num1 + num2
+    session['start_time'] = time.time()
+    return render_template('child.html', num1=num1, num2=num2, score=session['score'], message=session['message'])
+
+if __name__ == '__main__':
+    app.run(debug=True)
