@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Добро пожаловать</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Добро пожаловать!</h1>
-        <div class="links">
-            <a href="{{ url_for('parent') }}" class="button">Родитель</a>
-            <a href="{{ url_for('child') }}" class="button">Ребенок</a>
-        </div>
-    </div>
+    <h1>Добро пожаловать в Rozoom MVP!</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('parent') }}">Родитель</a></li>
+            <li><a href="{{ url_for('child') }}">Ребёнок</a></li>
+        </ul>
+    </nav>
 </body>
 </html>
