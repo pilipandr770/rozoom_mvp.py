@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>Добро пожаловать</title>
+    <title>{{ gettext('Welcome') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Добро пожаловать в Rozoom MVP!</h1>
+    <h1>{{ gettext('Welcome to Rozoom MVP!') }}</h1>
     <nav>
         <ul>
-            <li><a href="{{ url_for('parent') }}">Родитель</a></li>
-            <li><a href="{{ url_for('child') }}">Ребёнок</a></li>
+            <li><a href="{{ url_for('parent') }}">{{ gettext('Parent') }}</a></li>
+            <li><a href="{{ url_for('child') }}">{{ gettext('Child') }}</a></li>
         </ul>
     </nav>
 </body>

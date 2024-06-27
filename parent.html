@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>Родительская страница</title>
+    <title>{{ gettext('Parent Page') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Статистика</h1>
-    <p>Всего вопросов: {{ total_questions }}</p>
-    <p>Правильных ответов: {{ correct_answers }}</p>
-    <p>Счёт: {{ score }}</p>
-    <a href="{{ url_for('home') }}">Назад на главную</a>
+    <h1>{{ gettext('Statistics') }}</h1>
+    <p>{{ gettext('Total questions') }}: {{ total_questions }}</p>
+    <p>{{ gettext('Correct answers') }}: {{ correct_answers }}</p>
+    <p>{{ gettext('Score') }}: {{ score }}</p>
+    <a href="{{ url_for('home') }}">{{ gettext('Back to home') }}</a>
 </body>
 </html>

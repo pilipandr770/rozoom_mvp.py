@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>Детская страница</title>
+    <title>{{ gettext('Child Page') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
-    <h1>Ответь на вопрос</h1>
-    <p>{{ num1 }} + {{ num2 }} = ?</p>
+    <h1>{{ gettext('Answer the question') }}</h1>
+    <p>{{ num1 }} {{ operation }} {{ num2 }} = ?</p>
     <form method="post">
         <input type="text" name="answer" required>
-        <button type="submit">Отправить</button>
+        <button type="submit">{{ gettext('Submit') }}</button>
     </form>
-    <p>{{ message }}</p>
-    <p>Счёт: {{ score }}</p>
-    <a href="{{ url_for('home') }}">Назад на главную</a>
+    <p class="message">{{ message }}</p>
+    <p>{{ gettext('Score') }}: {{ score }}</p>
+    <a href="{{ url_for('home') }}">{{ gettext('Back to home') }}</a>
 </body>
 </html>
