@@ -1,19 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_babel import Babel, gettext
 import random
 import time
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Лучше заменить на безопасный ключ из переменных окружения
-
-# Конфигурация Flask-Babel
-app.config['BABEL_DEFAULT_LOCALE'] = 'en'
-app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'ru']
-babel = Babel(app)
-
-@babel.localeselector
-def get_locale():
-    return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
 
 @app.route('/')
 def home():
@@ -42,18 +32,18 @@ def child():
             answer = float(request.form['answer'])
             if 'start_time' in session and time.time() - session['start_time'] > 10:
                 session['score'] -= 5
-                session['message'] = gettext("Time's up!")
+                session['message'] = "Zeit ist um!"
             else:
                 if answer == session.get('correct_answer'):
                     session['score'] += 10
                     session['correct_answers'] += 1
-                    session['message'] = gettext("Correct!")
+                    session['message'] = "Richtig!"
                 else:
                     session['score'] -= 5
-                    session['message'] = gettext("Incorrect!")
+                    session['message'] = "Falsch!"
         except (ValueError, KeyError):
             session['score'] -= 5
-            session['message'] = gettext("Invalid input. Incorrect!")
+            session['message'] = "Ungültige Eingabe. Falsch!"
         
         session['total_questions'] += 1
         return redirect(url_for('child'))
@@ -63,16 +53,22 @@ def child():
     operation = random.choice(['+', '-', '*', '/'])
     
     if operation == '+':
-        session['correct_answer'] = num1 + num2
+        correct_answer = num1 + num2
     elif operation == '-':
-        session['correct_answer'] = num1 - num2
+        correct_answer = num1 - num2
     elif operation == '*':
-        session['correct_answer'] = num1 * num2
+        correct_answer = num1 * num2
     elif operation == '/':
-        session['correct_answer'] = round(num1 / num2, 2)
+        correct_answer = round(num1 / num2, 2)
     
+    session['correct_answer'] = correct_answer
     session['start_time'] = time.time()
-    return render_template('child.html', num1=num1, num2=num2, operation=operation, score=session['score'], message=session['message'])
+    
+    wrong_answers = [correct_answer + random.randint(-10, 10) for _ in range(3)]
+    options = wrong_answers + [correct_answer]
+    random.shuffle(options)
+    
+    return render_template('child.html', num1=num1, num2=num2, operation=operation, options=options, score=session['score'], message=session['message'])
 
 if __name__ == '__main__':
     app.run(debug=True)

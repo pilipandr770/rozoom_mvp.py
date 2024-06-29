@@ -1,17 +1,37 @@
 <!DOCTYPE html>
-<html lang="{{ get_locale() }}">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>{{ gettext('Welcome') }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Frage für Kinder</title>
 </head>
 <body>
-    <h1>{{ gettext('Welcome to Rozoom MVP!') }}</h1>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('parent') }}">{{ gettext('Parent') }}</a></li>
-            <li><a href="{{ url_for('child') }}">{{ gettext('Child') }}</a></li>
-        </ul>
-    </nav>
+    <h1>Lösen Sie das Problem: {{ num1 }} {{ operation }} {{ num2 }}</h1>
+    
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    
+    <form action="{{ url_for('child') }}" method="post">
+        <div>
+            <input type="radio" id="answer_1" name="answer" value="{{ options[0] }}">
+            <label for="answer_1">{{ options[0] }}</label>
+        </div>
+        <div>
+            <input type="radio" id="answer_2" name="answer" value="{{ options[1] }}">
+            <label for="answer_2">{{ options[1] }}</label>
+        </div>
+        <div>
+            <input type="radio" id="answer_3" name="answer" value="{{ options[2] }}">
+            <label for="answer_3">{{ options[2] }}</label>
+        </div>
+        <div>
+            <input type="radio" id="answer_4" name="answer" value="{{ options[3] }}">
+            <label for="answer_4">{{ options[3] }}</label>
+        </div>
+        <button type="submit">Absenden</button>
+    </form>
+    
+    <p>Punkte: {{ score }}</p>
 </body>
 </html>
+
